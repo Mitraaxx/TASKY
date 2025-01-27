@@ -12,6 +12,7 @@ export const TasksProvider = ({children}) =>{
     const [tasks, setTasks] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     const[task, setTask] = React.useState({});
+    const[priority, setPriority] = React.useState("all");
 
     // get tasks
     const getTasks = async () =>{
@@ -54,6 +55,36 @@ export const TasksProvider = ({children}) =>{
         setLoading(false);
     };
 
+    // update task
+    const updateTask = async (task) => {
+        setLoading(true);
+        try{
+            const res = await axios.patch(`${serverUrl}/task/${task._id}`, task);
+            
+            const newTasks = tasks.map((tsk) => {
+                return tsk._id === res.data._id ? res.data : tsk;
+            });
+
+            setTasks(newTasks);
+        } catch(error){
+            console.log("Error updating task", error);
+        }
+    };
+  
+    // delete task
+    const deleteTask = async (taskId) => {
+        setLoading(true);
+        try{
+            await axios.delete(`${serverUrl}/task/${taskId}`);
+
+            const newTasks = tasks.filter((tsk) => tsk._id !== taskId);
+
+            setTask(newTasks);
+        }
+        catch(error){
+            console.log("Error deleting task", error);
+      }
+    };
     
 
     useEffect(() => {
@@ -64,6 +95,14 @@ export const TasksProvider = ({children}) =>{
      <TasksContext.Provider
     value={{
         tasks,
+        loading,
+        task,
+        getTask,
+        createTask,
+        updateTask,
+        deleteTask,
+        priority,
+        setPriority
     }}
     >
         {children}
