@@ -1,5 +1,8 @@
+import axios from "axios";
 import React, { createContext, useEffect} from 'react';
 import { useUserContext } from './userContext';
+import toast from "react-hot-toast";
+
 
 const TasksContext = createContext();
 
@@ -15,18 +18,18 @@ export const TasksProvider = ({children}) =>{
     const[priority, setPriority] = React.useState("all");
 
     // get tasks
-    const getTasks = async () =>{
+         const getTasks = async () => {
         setLoading(true);
-        try{
-            const response = await axios.get(`${serverUrl}/tasks`);
-
-            setTasks(response.data);
-        }
-        catch(error){
-            console.log("Error getting tasks",error);
+        try {
+          const response = await axios.get(`${serverUrl}/tasks`);
+    
+          setTasks(response.data.tasks);
+        } catch (error) {
+          console.log("Error getting tasks", error);
         }
         setLoading(false);
-    };
+      };
+    
 
     // get task
     const getTask = async (taskId) =>{
@@ -97,6 +100,7 @@ export const TasksProvider = ({children}) =>{
         tasks,
         loading,
         task,
+        tasks,
         getTask,
         createTask,
         updateTask,
