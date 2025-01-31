@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 import React, { createContext, useEffect} from 'react';
 import { useUserContext } from './userContext';
@@ -14,8 +15,37 @@ export const TasksProvider = ({children}) =>{
 
     const [tasks, setTasks] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
+    const [isEditing, setIsEditing] = React.useState(false);
     const[task, setTask] = React.useState({});
     const[priority, setPriority] = React.useState("all");
+    const [activeTask, setActiveTask] = React.useState(null);
+    const [modalMode, setModalMode] = React.useState("");
+    const [profileModal, setProfileModal] = React.useState(false);
+
+
+    const openModalAdd = () => {
+        setModalMode("add");
+        setIsEditing(true);
+        setTask({});
+    };
+
+    const openModalEdit = (task) => {
+        setModalMode("edit");
+        setIsEditing(true);
+        setActiveTask(task);
+    };
+
+    const openProfileModal = () => {
+        setProfileModal(true);
+    };
+
+    const closeModal = () => {
+        setIsEditing(false);
+        setProfileModal(false);
+        setModalMode("");
+        setActiveTask(null);
+        setTask({});
+    }
 
     // get tasks
          const getTasks = async () => {
@@ -51,6 +81,7 @@ export const TasksProvider = ({children}) =>{
         try{
             const res = await axios.post(`${serverUrl}/task/create`, task);
             setTasks([...tasks, res.data]);
+            toast.success("Task created successfully");
         }
         catch(error){
             console.log("Error creating task",error);
@@ -89,6 +120,14 @@ export const TasksProvider = ({children}) =>{
       }
     };
     
+    const handleInput = (name) => (e) => {
+        if(name === 'setTask'){
+            setTask(e);
+        }
+        else{
+            setTask({...task, [name]: e.target.value});
+        }
+    };
 
     useEffect(() => {
         getTasks();
@@ -106,7 +145,16 @@ export const TasksProvider = ({children}) =>{
         updateTask,
         deleteTask,
         priority,
-        setPriority
+        setPriority,
+        handleInput,
+        isEditing,
+        setIsEditing,
+        openModalAdd,
+        openModalEdit,
+        openProfileModal,
+        activeTask,
+        setActiveTask,
+        closeModal
     }}
     >
         {children}
