@@ -4,7 +4,15 @@ import useDetectOutside from '@/hooks/useDetectOutside';
 import React, { useEffect } from 'react'
 
 function Modal() {
-    const {task ,handleInput, createTask, isEditing,closeModal} = useTasks();
+    const {task ,
+        handleInput,
+        createTask,
+        isEditing,
+        closeModal,
+        modalMode,
+        activeTask,
+        updateTask  
+      } = useTasks();
     const ref = React.useRef(null);
 
     useDetectOutside({
@@ -16,12 +24,21 @@ function Modal() {
         },
     });
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+      if(modalMode === "edit" && activeTask){
+        handleInput("setTask")(activeTask);
+      }
+    }, [modalMode,activeTask]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+      if(modalMode == 'edit'){
+        updateTask(task);
+      }else if(modalMode === "add"){
         createTask(task);
+      }
+      closeModal();
     };
  
     return (
@@ -101,7 +118,13 @@ function Modal() {
         </div>
 
         <div className='mt-8'>
-            <button type='submit'>Create Task</button>
+            <button type='submit'
+            className={`text-white py-2 rounded-md w-full hover:bg-blue-500 transition duration-200 ease-in-out ${
+              modalMode === "edit" ? "bg-blue-400" : "bg-green-400"
+            }`}
+          >
+            {modalMode === "edit" ? "Update Task" : "Create Task"}
+            </button>
         </div>
 
         </form>

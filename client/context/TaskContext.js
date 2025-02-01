@@ -99,6 +99,8 @@ export const TasksProvider = ({children}) =>{
                 return tsk._id === res.data._id ? res.data : tsk;
             });
 
+            toast.success("Task updaated successfully");
+
             setTasks(newTasks);
         } catch(error){
             console.log("Error updating task", error);
@@ -129,6 +131,12 @@ export const TasksProvider = ({children}) =>{
         }
     };
 
+    // get completed tasks
+    const completedTasks = tasks.filter((task) => task.completed);
+
+    // get pending tasks
+    const activeTasks = tasks.filter((task) => !task.completed);     
+
     useEffect(() => {
         getTasks();
     }, [userid]);
@@ -154,7 +162,10 @@ export const TasksProvider = ({children}) =>{
         openProfileModal,
         activeTask,
         setActiveTask,
-        closeModal
+        closeModal,
+        modalMode,
+        activeTasks,
+        completedTasks
     }}
     >
         {children}

@@ -1,3 +1,4 @@
+import { useTasks } from '@/context/TaskContext';
 import { edit, star, trash } from '@/utils/Icons';
 import { Task } from '@/utils/types'
 import { formatTime } from '@/utils/utilities'
@@ -22,6 +23,7 @@ function TaskItem({task}: TaskItemProps) {
     }
   };
   
+  const {getTask, openModalEdit, deleteTask, modalMode} = useTasks();
   
   return (
     <div className="h-[16rem] px-4 py-3 flex flex-col gap-4 shadow-sm bg-[#f9f9f9] rounded-lg border-2 border-white">
@@ -44,7 +46,12 @@ function TaskItem({task}: TaskItemProps) {
           >
             {star}
           </button>
-          <button className='text-[#00A1F1]'>{edit}</button>
+          <button className='text-[#00A1F1]'
+            onClick={() =>{
+              getTask(task._id);
+              openModalEdit(task);
+            }}
+          >{edit}</button>
           <button className='text-[#F65314]'>{trash}</button>
             </div>
           </div>
