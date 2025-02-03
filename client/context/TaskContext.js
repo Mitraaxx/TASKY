@@ -165,7 +165,8 @@ export const TasksProvider = ({children}) =>{
         closeModal,
         modalMode,
         activeTasks,
-        completedTasks
+        completedTasks,
+        profileModal
     }}
     >
         {children}
