@@ -110,17 +110,17 @@ export const TasksProvider = ({children}) =>{
     // delete task
     const deleteTask = async (taskId) => {
         setLoading(true);
-        try{
-            await axios.delete(`${serverUrl}/task/${taskId}`);
-
-            const newTasks = tasks.filter((tsk) => tsk._id !== taskId);
-
-            setTask(newTasks);
+        try {
+          await axios.delete(`${serverUrl}/task/${taskId}`);
+    
+          // remove the task from the tasks array
+          const newTasks = tasks.filter((tsk) => tsk._id !== taskId);
+    
+          setTasks(newTasks);
+        } catch (error) {
+          console.log("Error deleting task", error);
         }
-        catch(error){
-            console.log("Error deleting task", error);
-      }
-    };
+      };
     
     const handleInput = (name) => (e) => {
         if(name === 'setTask'){

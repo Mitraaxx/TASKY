@@ -14,7 +14,7 @@ function page() {
     }
   }, [user, router]);
 
-  if(user && user){
+  if(user && user._id){
     return null;
   }
 

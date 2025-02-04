@@ -1,14 +1,15 @@
-"8se client";
+"use client";
 import React, { useEffect } from "react";
 import RegisterForm from "../Components/auth/RegisterForm/RegisterForm";
 import { useUserContext } from "@/context/userContext";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
 
 
 function page() {
 
   const {user} = useUserContext();
-  const router = useRouter();
+  const router = useRouter
 
   useEffect(() =>{
       if(user && user._id){
@@ -16,7 +17,7 @@ function page() {
       }
     }, [user, router]);
   
-    if(user && user){
+    if(user && user._id){
       return null;
     }
 

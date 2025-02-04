@@ -56,7 +56,15 @@ function TaskItem({task}: TaskItemProps) {
               openModalEdit(task);
             }}
           >{edit}</button>
-          <button className='text-[#F65314]'>{trash}</button>
+
+          <button 
+          className='text-[#F65314]'
+          onClick={() => {
+            deleteTask(task._id);
+          }}
+          >{trash}
+          </button>
+
             </div>
           </div>
         </div>
