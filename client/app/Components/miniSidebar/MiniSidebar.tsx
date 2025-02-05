@@ -15,7 +15,7 @@ function MiniSidebar() {
     const pathname = usePathname();
 
     const getStrokeColor = (link: string) =>{
-        return pathname === link ? "#3aafae" : "#71717a"; 
+        return pathname === link ? "#0074f1" : "#71717a"; 
     };
 
     const navItems = [
@@ -43,7 +43,7 @@ function MiniSidebar() {
   return (
     <div className="basis-[5rem] flex flex-col bg-[#f9f9f9]">
       <div className="flex items-center justify-center h-[5rem]">
-      <Image src = "/flurry.png" width={28} height={28} alt="logo"/>
+      <Image src = "/Tasky-logo.jpg" width={57} height={57} alt="logo"/>
       </div>
 
       <div className="mt-8 flex-1 flex flex-col items-center justify-between">
@@ -53,7 +53,7 @@ function MiniSidebar() {
                 <Link href={item.link}>{item.icon}</Link>
 
                 {/* Hover Tooltip */}
-              <span className="u-triangle absolute top-[50%] translate-y-[-50%] left-8 text-xs pointer-events-none text-white bg-[#3aafae] px-2 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="u-triangle absolute top-[50%] translate-y-[-50%] left-8 text-xs pointer-events-none text-white bg-[#0074f1] px-2 py-1 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {item.title}
               </span>
               </li>

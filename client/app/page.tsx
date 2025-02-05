@@ -11,7 +11,6 @@ import { container, item } from "@/utils/animations";
 
 
 
-
 export default function Home() {
   useRedirect("/login");
 
@@ -47,3 +46,4 @@ export default function Home() {
     </main>
   );
 }
+

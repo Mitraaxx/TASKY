@@ -15,7 +15,7 @@ function Profile() {
         >
     <div>
     <Image
-    src={user?.photo}
+    src= "/Tasky-logo.jpg"
     alt="avatar"
     width={70}
     height={70}

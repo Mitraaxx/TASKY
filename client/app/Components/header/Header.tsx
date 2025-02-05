@@ -23,7 +23,7 @@ function Header() {
       <div>
         <h1 className='text-lg font-medium'>
           <span role="img" aria-label="wave">
-          👋
+          ✌️
           </span>
           {userId ? `Welcome, ${name}` : "Welcome to TASKY"}
         </h1>
@@ -42,8 +42,8 @@ function Header() {
 
 
       <div className="h-[50px] flex items-center gap-[10.4rem]">
-        <button className="px-8 py-3 bg-[#3aafae] text-white rounded-[50px]
-          hover:bg-[#00A1F1] hover:text-white transition-all duration-200 ease-in-out"
+        <button className="px-8 py-3 bg-[#024950] text-white rounded-[50px]
+          hover:bg-[#024a50d9] hover:text-white transition-all duration-200 ease-in-out"
           onClick={() => {
             if(userId){
               openModalAdd();

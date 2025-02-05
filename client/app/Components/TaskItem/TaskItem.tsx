@@ -50,7 +50,7 @@ function TaskItem({task}: TaskItemProps) {
           >
             {star}
           </button>
-          <button className='text-[#00A1F1]'
+          <button className='text-[#0074f1]'
             onClick={() =>{
               getTask(task._id);
               openModalEdit(task);
